@@ -1,8 +1,7 @@
-import java.util.*;
 import java.awt.*;
 import java.io.*;
 //location in r,c max value is 25,25
-
+@SuppressWarnings("serial")
 public class block implements Serializable {
 	private Rectangle rect;
 	private int image;// 1==grass 2==bricks 3==Column

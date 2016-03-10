@@ -2,7 +2,7 @@ import java.util.*;
 import java.awt.*;
 import java.io.*;
 
-
+@SuppressWarnings("serial")
 public class Explosion implements Serializable{
 	private int power;
 	private Rectangle rect;

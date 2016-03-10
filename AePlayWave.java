@@ -15,7 +15,7 @@ public class AePlayWave extends Thread {
 
 	private Position curPosition;
 
-	private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb
+	private final int EXTERNAL_BUFFER_SIZE = 524288; // 512Kb
 
 	enum Position {
 		LEFT, RIGHT, NORMAL

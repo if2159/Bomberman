@@ -8,18 +8,9 @@
 import java.util.*;
 import java.awt.*;
 import java.io.*;
-import javax.imageio.*;
-import javax.swing.*;
-import static java.lang.System.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.*;
-import javax.swing.JFrame;
-import java.net.*;
 
 
+@SuppressWarnings("serial")
 public class Player implements Serializable{
 	private int x,y;
 	private int score;
@@ -27,18 +18,18 @@ public class Player implements Serializable{
 	private Color color;
 //	private BufferedImage image;
 	private int bombCount, bombMax;
-	private int bombs;
 	private ArrayList<Bomb> bombList;
 	private ArrayList<Explosion> explodeList;
 	private int power;
 	private boolean dead;
 	private int lives;
+	private UUID id;
 
 
     public Player() {
     }
 
-    public Player(int X, int Y/*,BufferedImage img*/) {
+    public Player(int X, int Y,UUID i) {
     	x=X;
     	y=Y;
     	rect=new Rectangle(x+4,y+3,32-4-5,29-3-4);
@@ -52,12 +43,11 @@ public class Player implements Serializable{
     	lives=3;
     	bombList.add(new Bomb());// DO NOT REMOVE THESE TWO LINES
     	bombList.remove(0);//WILL BREAK BOMB DROPPING; SOMETHING TO DO WITH THREAD SYNCHRONIZATION
+    	id=i;
     }
 
     public ArrayList<Bomb> getBombs(){
     	ArrayList<Bomb> temp=new ArrayList<Bomb>(bombList);
-    //	out.println(bombList.size());
-    //	out.println(temp.size());
    		bombList=new ArrayList<Bomb>();
     	return temp;
     }
@@ -80,7 +70,10 @@ public class Player implements Serializable{
     	y=Y;
     	rect.setLocation(x+4,y+3);
     	}
-
+    
+    public UUID getID(){return id;}
+    public void setID(UUID i){id=i;}
+    
     public void decBomb(){
     	if(bombCount!=0)
     		bombCount--;
@@ -105,7 +98,6 @@ public class Player implements Serializable{
 
 		}
 
-
    /* public BufferedImage getImage(){
     	return image;
     	}
@@ -117,14 +109,10 @@ public class Player implements Serializable{
 		return y;}
 
 	public void dropBomb(){
-		//out.println("DROPPING"+bombCount);
 			if(bombCount<bombMax){
 				bombCount++;
-			//	out.println(bombCount+ " "+bombList.size());
-				bombList.add(new Bomb(x+16,y+16));
-				//out.println(bombList);
+				bombList.add(new Bomb(x+16,y+16,id));
 				}
-			//	out.println("DROPPINGasdgasdfgasdgasdfg"+bombCount);
 		}
 	public void explode(){
 
